@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.desafiofinalspringboot.model.Cliente;
 import br.com.desafiofinalspringboot.service.ClienteService;
 
+
 @RestController
 @RequestMapping("clientes")
 public class ClienteRestController {
 
 	@Autowired
 	private ClienteService clienteService;
+
 
 	@GetMapping
 	public ResponseEntity<Iterable<Cliente>> buscarTodos() {

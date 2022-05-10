@@ -1,15 +1,20 @@
 package br.com.desafiofinalspringboot.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import br.com.desafiofinalspringboot.model.Cliente;
 import br.com.desafiofinalspringboot.model.ClienteRepository;
 import br.com.desafiofinalspringboot.model.Endereco;
 import br.com.desafiofinalspringboot.model.EnderecoRepository;
+import br.com.desafiofinalspringboot.model.Telefone;
+import br.com.desafiofinalspringboot.model.TelefoneRepository;
 import br.com.desafiofinalspringboot.service.ClienteService;
 import br.com.desafiofinalspringboot.service.ViaCepService;
 
+@Service
 public class ClienteServiceImpl implements ClienteService {
 
 	// Singleton: Injetar os componentes do Spring com @Autowired.
@@ -19,6 +24,8 @@ public class ClienteServiceImpl implements ClienteService {
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private ViaCepService viaCepService;
+	@Autowired
+	private TelefoneRepository telefoneRepository;
 
 	// Strategy: Implementar os métodos definidos na interface.
 	// Facade: Abstrair integrações com subsistemas, provendo uma interface simples.
@@ -54,6 +61,10 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public void deletar(Long id) {
 		// Deletar Cliente por ID.
+		List<Telefone> listTelefone = (List<Telefone>) telefoneRepository.findAll();
+		for (Telefone telefone : listTelefone) {
+			telefoneRepository.deleteById(telefone.getIdTelefone());
+		}		
 		clienteRepository.deleteById(id);
 	}
 

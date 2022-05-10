@@ -3,8 +3,6 @@ package br.com.desafiofinalspringboot.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.Data;
-
 @Entity
 public class Endereco {
 
